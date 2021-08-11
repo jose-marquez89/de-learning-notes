@@ -128,3 +128,25 @@ A typical workflow:
 - in the case of Amazon Redshift, the storage system is S3
 
 ### Putting it all together
+A typical macro level workflow
+- create functions that extract, transform and load
+- a main etl function runs all the other functions
+- you can then manage a DAG using apache Airflow
+
+#### Defining a DAG: Airflow
+```python
+from airflow.models import DAG
+from airflow.operators.python_operator import PythonOperator
+
+dag  = DAG(dag_id="etl_pipeline",
+           schedule_interval="0 0 * * *")
+
+etl_task = PythonOperator(task_id="etl_task",
+                          python_callable=etl,
+                          dag=dag)
+
+etl_task.set_upstream(wait_for_this_task)
+```
+The file above would be saved as `etl_dag.py` in `~/airflow/dags`
+You can go to [crontab.guru](https://crontab.guru) to learn more about cron expressions.
+You can find instructions on running Airflow locally [here](https://airflow.apache.org/docs/apache-airflow/stable/start/index.html)
