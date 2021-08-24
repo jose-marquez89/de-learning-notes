@@ -53,3 +53,22 @@ print(survey_subset.head())
 ```
 
 #### Parsing Dates
+- python stores dates as datetime
+- `parse_dates` argument to specify that there are columns with dates
+    - accepts
+      - column names list
+      - list of lists for cols to combine and parse
+      - dict where keys are new colnames and values are lists of cols to parse together
+  - doesn't work with non-standard dates
+  - use `pd.to_datetime()` if that doesn't work
+    - use the `format` kwarg if need be
+  - you can refer to [strftime.org](https://strftime.org) for list of string formatting for datetime
+
+|**Code**|**Meaning**|**Example**|
+|--------|-----------|-----------|
+|`%Y`|Year (4-digit)|1999|
+|`%m`|Month (zero-padded)|03|
+|`%d`|Day (zero-padded)|01|
+|`%H`|Hour (24-hour clock)|21|
+|`%M`|Minute (zero-padded)|09|
+|`%S`|Second (zero-padded)|05|
