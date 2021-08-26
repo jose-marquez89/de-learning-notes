@@ -40,3 +40,22 @@ weather = pd.read_sql("weather", engine)
 q = "SELECT * FROM weather;"
 weather = pd.read_sql(q, engine)
 ```
+### Refining imports with SQL queries
+- you can refine `read_sql()` calls with SQL
+
+**Example**
+```python
+import pandas as pd
+from sqlalchemy import create_engine
+
+engine = create_engine("sqlite:///data.db")
+
+query = """SELECT * 
+           FROM hpd311calls
+           WHERE borough = 'BROOKLYN';"""
+brooklyn_calls = pd.read_sql(query, engine)
+print(brooklyn_calls.borough.unique())
+```
+
+### More complex SQL queries
+
