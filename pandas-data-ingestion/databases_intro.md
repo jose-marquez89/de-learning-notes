@@ -59,3 +59,54 @@ print(brooklyn_calls.borough.unique())
 
 ### More complex SQL queries
 
+#### Unique values
+- you can use `SELECT DISTINCT` in a pandas sql query to get unique values
+- `SELECT DISTINCT [column names] FROM [table];`
+- remove duplicates `SELECT DISTINCT * FROM [table];
+
+Example
+```sql
+-- Get unique street addresses and boroughs
+SELECT DISTINCT incident_address,
+    borough
+FROM hpd311calls;
+```
+#### Aggregate functions
+A few examples:
+- `SUM`
+- `AVG`
+- `MAX`
+- `MIN`
+- `COUNT`
+
+First four above each take a single column name in parentheses:
+```SQL
+SELECT AVG(tmax) FROM weather;
+```
+`COUNT` is different:
+```sql
+-- get num of rows that meet query conditions 
+SELECT COUNT(*) FROM [table_name];
+
+-- get num of unique values in a column
+SELECT COUNT(DISTINCT [column_names]) FROM [table_name];
+```
+
+#### Group by
+- aggregate functions return a single summary stat
+- `GROUP BY` lets you summarize by categories
+- you need to select the column you're grouping by
+
+Counting by groups using pandas and SQL:
+```python
+engine = create_engine("sqlite:///data.db")
+
+query = """SELECT borough, COUNT(*)
+           FROM hpd311calls
+           WHERE complaint_type = 'PLUMBING'
+           GROUP BY borough;"""
+
+plumbing_call_counts = pd.read_sql(query, engine)
+```
+
+### Loading multiple tables with joins
