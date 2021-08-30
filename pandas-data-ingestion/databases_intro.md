@@ -110,3 +110,21 @@ plumbing_call_counts = pd.read_sql(query, engine)
 ```
 
 ### Loading multiple tables with joins
+- keys let you join separate tables
+- key columns need to have the same data type
+
+**Joining and Aggregating**
+```sql
+SELECT hpd311calls.borough,
+    COUNT(*),
+    boro_census.total_population,
+    boro_census.housing_units,
+FROM hpd311calls
+JOIN boro_census
+ON hpd311calls.borough = boro_census.borough
+GROUP BY hpd311calls.borough;
+```
+_Something I'm not sure about SQL: when you group by a particular category, do numeric columns included in the group by get summed by default?_ 
+
+
+### Intro to JSON
