@@ -125,6 +125,3 @@ ON hpd311calls.borough = boro_census.borough
 GROUP BY hpd311calls.borough;
 ```
 _Something I'm not sure about SQL: when you group by a particular category, do numeric columns included in the group by get summed by default?_ 
-
-
-### Intro to JSON
