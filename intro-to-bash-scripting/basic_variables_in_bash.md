@@ -1,0 +1,1 @@
+# Basic variables in bash
