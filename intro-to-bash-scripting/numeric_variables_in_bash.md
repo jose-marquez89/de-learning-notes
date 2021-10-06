@@ -1,0 +1,1 @@
+# Numeric variables in Bash
