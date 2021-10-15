@@ -27,12 +27,12 @@ if (($x > 5)); then
 fi
 ```
 You can also use the following equivalents
--`-eq`: equal to
--`-ne`: not equal to
--`-lt`: less than
--`-le`: less than or equal to
--`-gt`: greater than
--`-ge`: greater than or equal to
+- `-eq`: equal to
+- `-ne`: not equal to
+- `-lt`: less than
+- `-le`: less than or equal to
+- `-gt`: greater than
+- `-ge`: greater than or equal to
 
 Using square brackets:
 ```bash
@@ -42,10 +42,10 @@ if [ $x -gt 5 ]; then
 fi
 ```
 File related flags you can use:
--`-e` file exists
--`-s` file exists and has size greater than zero
--`-r` file exists and is readable
--`-w` file exists and is writable
+- `-e` file exists
+- `-s` file exists and has size greater than zero
+- `-r` file exists and is readable
+- `-w` file exists and is writable
 
 You can find more flags [here](https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html)
 
