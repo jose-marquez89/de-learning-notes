@@ -81,4 +81,58 @@ fi
 ```
 
 ## FOR loops and WHILE statements
-TODO
+For loop syntax
+```bash
+for x in 1 2 3
+do
+    echo $x
+done
+```
+
+Creating a "range" (brace expansion)
+Syntax: `{START..STOP..INCREMENT}` defaults to one if not specified
+```bash
+# prints 1, 3, 5
+for x in {1..5..2}
+do 
+    echo $x
+done
+```
+Three expression syntax
+```bash
+for ((x=2;x<=4;x+=2))
+do
+    echo $x
+done
+```
+
+### Glob expansions
+Example:
+```bash
+for book in books/*
+do
+    echo $book
+done
+```
+
+### Shell within a shell
+Example
+```bash
+for book in $(ls books/ | grep -i 'air')
+do
+    echo $book
+done
+```
+
+### WHILE loops
+Simple example
+```bash
+x=1
+while [ $x -le 3 ];
+do
+    echo $x
+    ((x+=1))
+done
+```
+
+## CASE statements
