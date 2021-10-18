@@ -136,3 +136,27 @@ done
 ```
 
 ## CASE statements
+Basic Format
+```bash
+case 'STRING' in
+    PATTERN1)
+    COMMAND1;;
+    PATTERN2)
+    COMMAND2;;
+    *) # this is common practice though not required
+    DEFAULT COMMAND;
+esac
+```
+Example
+```bash
+case $(cat $1) in
+    *sydney*)
+    mv $1 sydney/ ;;
+    *melbourne*|*brisbane*)
+    rm $1 ;;
+    *canberra*)
+    mv $1 "IMPORTANT_$1" ;;
+    *)
+    echo "No cities found" ;;
+esac
+```
