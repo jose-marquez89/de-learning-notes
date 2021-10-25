@@ -81,3 +81,18 @@ echo "30F in Celsius is $converted C"
 ```
 
 ## Scheduling with cron
+Check for cronjobs in the crontab with `crontab -l`
+
+Five stars in typical cron structure:
+`* * * * *`
+minute - hour - day of month - month - day of week
+
+You can add specific intervals: `15,30,45 * * * *`
+
+You can add a slash for increments: `*/15 * * * *`
+
+### Editing the crontab
+Use `crontab -e` to use a text editor to edit the crontab
+
+Create the cronjob (each line is a job):
+`30 1 * * *  extract_data.sh`
