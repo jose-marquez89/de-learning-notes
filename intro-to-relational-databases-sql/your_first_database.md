@@ -25,4 +25,21 @@ WHERE table_name = 'pg_config';
 For your purposes, you will usually only be concerned with 'public' schema which holds user-defined tables and databases
 
 ## Tables: at the core of every database
-TODO: This section
+
+### Creating a table
+```sql
+CREATE TABLE weather (
+    clouds text,
+    temperature numeric,
+    weather_station char(5)
+)
+```
+
+If a table is still empty and you need to add a column you can do so (you can still do it if the table isn't empty but things get a little more complex):
+```sql
+ALTER TABLE table_name
+ADD COLUMN column_name data_type;
+```
+
+### Updating the database as the structure changes
+TODO
