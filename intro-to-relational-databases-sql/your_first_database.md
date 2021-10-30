@@ -42,4 +42,41 @@ ADD COLUMN column_name data_type;
 ```
 
 ### Updating the database as the structure changes
+Inserting new distinct records
+```sql
+INSERT INTO organizations
+SELECT DISTINCT organization,
+    organization_sector
+FROM university_professors;
+```
+
+Inserting values manually
+```sql
+INSERT INTO table_name (column_a, column_b)
+VALUES ("value_a", "value_b")
+```
+
+Rename a column
+```sql
+CREATE TABLE affiliations (
+    first_name text,
+    last_name text,
+    university_shortname text,
+    function text,
+    organisation text
+);
+
+-- Rename the 'organisation' column
+ALTER TABLE table_name
+RENAME COLUMN old_name TO new_name;
+```
+
+Drop a column
+```sql
+ALTER TABLE table_name
+DROP COLUMN column_name
+```
+You should take care to reduce redundancy in databases. If there's a column that's redundant in terms of referencing some entity, remove it.
+
+### Better data quality with constraints
 TODO
