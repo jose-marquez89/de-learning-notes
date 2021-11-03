@@ -77,6 +77,3 @@ ALTER TABLE table_name
 DROP COLUMN column_name
 ```
 You should take care to reduce redundancy in databases. If there's a column that's redundant in terms of referencing some entity, remove it.
-
-### Better data quality with constraints
-TODO
