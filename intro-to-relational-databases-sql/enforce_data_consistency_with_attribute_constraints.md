@@ -75,3 +75,50 @@ USING SUBSTRING(column_name, FROM 1 FOR x)
 ```
 
 ## The not-null and unique constraints
+- won't allow `NULL` values
+- you won't be able to insert them in the future
+
+What does `NULL` mean?
+- unknown
+- doesn't exist
+- doesn't apply to column
+
+Example
+```sql
+CREATE TABLE students (
+    ssn integer not null,
+    last_name varchar(64) not null,
+    home_phone integer,
+    office_phone integer
+);
+```
+A student may not have a home phone number and may simply not have an office. These values can be `NULL`.
+Two `NULL` values may not have the same meaning, this implies `NULL != NULL`
+
+If your table has already been created
+```sql
+-- set not null
+ALTER TABLE students
+ALTER COLUMN home_phone
+SET NOT NULL;
+
+-- drop not null
+ALTER TABLE students
+ALTER COLUMN ssn
+DROP NOT NULL;
+```
+
+### The unique constraint
+Upon table creation
+```sql
+CREATE TABLE table_name (
+    column_name UNIQUE
+);
+```
+After table creation
+```sql
+ALTER TABLE table_name
+ADD CONSTRAINT some_name UNIQUE(column_name)
+```
+
+## Keys and super keys
