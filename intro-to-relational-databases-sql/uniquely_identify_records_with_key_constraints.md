@@ -54,4 +54,34 @@ ADD CONSTRAINT some_name PRIMARY KEY (column_name)
 ```
 
 ### Surrogate Keys
-TODO
+- Like an artificial primary key
+- not based on a native column from the data
+
+Why would you need this?
+- primary keys should be built from as few columns as possible
+- primary keys should never change over time
+- while other fields might change, the primary key always has the same value for the same record
+
+### Adding a surrogate key with a serial data type
+Once you add an id with a serial type, all the columns in your data will be numbered.
+```sql
+-- whenever you add a new record it will automatically get a new number
+-- that doesn't exist yet
+ALTER TABLE cars
+ADD COLUMN id serial PRIMARY KEY;
+INSERT INTO cars
+VALUES ('Volkwagen', 'Blitz', 'black');
+```
+"id" uniquely identifies records in the table
+
+### Another type of surrogate key
+Concatenating columns to create a surrogate key
+```sql
+ALTER TABLE table_name
+ADD COLUMN column_c varchar(256);
+
+UPDATE table_name
+SET column_c = CONCAT(column_a, column_b);
+ALTER TABLE table_name
+ADD CONSTRAINT pk PRIMARY KEY (column_c);
+```
