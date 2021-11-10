@@ -120,5 +120,3 @@ After table creation
 ALTER TABLE table_name
 ADD CONSTRAINT some_name UNIQUE(column_name)
 ```
-
-## Keys and super keys
