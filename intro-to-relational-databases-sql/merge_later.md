@@ -29,3 +29,5 @@ FROM table_b
 WHERE condition_1 AND condition_2 AND ...;
 ```
 
+## Referential integrity
+
