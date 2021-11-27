@@ -104,3 +104,9 @@ Options for `ON DELETE`:
 - `RESTRICT`: throws an error
 - `SET NULL`: set the referencing column to `NULL`
 - `SET DEFAULT`: set the referencing column to a pre-defined default
+
+### Additional notes
+- altering a key constrain doesn't work with `ALTER COLUMN` 
+    - you need to `DROP` the key constraint and then `ADD` a new one with a different `ON DELETE` behavior
+    - you need to know the name of the constraint when you try to delete it
+    - you can find these names in the `information_schema`
