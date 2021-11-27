@@ -67,3 +67,40 @@ WHERE condition_1 AND condition_2 AND ...;
 ```
 
 ## Referential integrity
+- A record referencing another table must refer to an existing record in that table
+- specified between two table
+- enforced through foreign keys
+
+### Referential integrity violations
+Referential integrity from table A to table B is violeted when:
+- if a record in table B that is referenced from a record in table A is deleted
+- if you insert a record into table A that references a non-existent record in table B
+- **foreign keys prevent you from accidentally making these kinds of violations**
+
+### Handling violations
+```sql
+-- ON DELETE is by default automatically added to a foreign key definition
+CREATE TABLE a (
+    id integer PRIMARY KEY,
+    column_a varchar(64),
+    ...,
+    b_id integer REFERENCES b (id) ON DELETE NO ACTION
+);
+```
+There are other alternatives:
+```sql
+-- the CASCADE options allows deletion of the record in table b 
+-- but also goes and deletes referenced records in table a
+CREATE TABLE a (
+    id integer PRIMARY KEY,
+    column_a varchar(64),
+    ...,
+    b_id integer REFERENCES b (id) ON DELETE CASCADE
+)
+```
+Options for `ON DELETE`:
+- `NO ACTION`: throws an error
+- `CASCADE`: deletes all referencing records
+- `RESTRICT`: throws an error
+- `SET NULL`: set the referencing column to `NULL`
+- `SET DEFAULT`: set the referencing column to a pre-defined default
