@@ -29,4 +29,26 @@
     - more about analysis in terms of business decisions
 
 ### OLAP vs OLTP
+
+Summary
+||OLTP|OLAP|
+|-|---|---|
+|_Purpose_|support daily transactions|report and analyze data|
+|_Design_|application oriented|subject-oriented|
+|_Data_|up-to-date and operational|consolidated and historical|
+|_Size_|snapshot, gigabytes|archive, terabytes|
+|_Queries_|simple transactions & frequent updates|complex, aggregate queries and limited updates|
+|_Users_|thousands|hundreds|
+
+
+Reliance
+- OLTP and OLAP depend on eachother
+- Operational database (OLTP) -> Data Warehouse (OLAP)
+
+#### Key Takeaways
+- step back and figure out your business requirements
+- difference between OLTP and OLAP
+- OLAP? OLTP? There are other approaches, but these two are a good place to start
+
+## Storing Data
 TODO
