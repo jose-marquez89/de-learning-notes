@@ -105,4 +105,44 @@ Trade Offs
     - transformed for specific process prior to using it in BI tools, analysis, build a data warehouse, do deep learning etc 
 
 ## Database design
+What it is it?
+- determines how data is stored
+    - how is data going to be read and updated?
+- uses **database models**, high level specifications for database structure
+    - relational databases are most common and popular
+        - rows as records
+        - columns as attributes
+    - other options: NoSQL models, object-oriented, network model
+- uses schemas
+    - blueprint of the database
+    - defines tables, fields, relationships, indices and views
+    - schema must be respected when inserting data in to relational databases
+
+### Data Modeling
+Data model process (high level)
+1. Conceptual data model: entities, relationships and attributes
+    - tools: data structure diagrams
+2. Logical data model: defines tables, columns, relationships "how does the concept map to actual tables?"
+    - tools: database models and schemas
+3. Physical data model: describes physical storage
+    - tools: partitions, CPU's, indexes, backup systems and table spaces
+
+### Beyond the relational model
+
+Dimensional model
+- an adaptation of the relational model
+- optimized for OLAP queries: aggregate data, not OLTP
+- typically uses a star schema
+- tends to be easy to interpret and extend
+
+Elements of dimensional model
+- fact tables
+    - decided by business use cases
+    - holds records of a metric
+    - changes regularly
+    - connects to dimensions via foreign keys
+- dimension tables
+    - holds descriptions of attributes
+    - doesn't change as often as the fact table
+
 
