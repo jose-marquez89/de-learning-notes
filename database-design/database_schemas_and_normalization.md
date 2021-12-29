@@ -54,4 +54,48 @@ SELECT * FROM dim_author;
 ```
 
 ## Normalized and Denormalized Databases
-TODO
+Normalized schemas will usually require more complex queries for analysis, so why would we normalize a database?
+- normalization saves space
+- denormalization enables data redundancy
+    - this saves less space but queries are less complex and often more performant
+
+### Normalization ensures better data integrity
+1. enforces data consistency
+    - referential integrity will keep spelling mistakes and things of that nature from making it into a table
+2. safer updating, removing and inserting
+    - less redundancy = less records to alter
+3. easier to redesign by extending
+    - small tables are easier to extend than larger tables
+
+### Pros and Cons of Normalization
+Pros
+- elimination of redundancy, saves space
+- better data integrity, accurate and consistent data
+
+Cons
+- complex queries require more CPU
+
+### Normalization and OLTP/OLAP
+OLTP (e.g. operational databases)
+- typically very normalized
+- lots of writing goes on
+- quick and safe insertion of data is priority
+
+OLAP (e.g. data warehouses)
+- read-intensive
+- priority is on quicker queries
+
+### SQL refresher
+Adding a new column to a snowflake schema table that references a new hierarchy via a foreign key constraint
+```sql
+-- Add a continent_id column with default value of 1
+ALTER TABLE dim_country_sf
+ADD COLUMN continent_id int NOT NULL DEFAULT(1);
+
+-- Add the foreign key constraint
+ALTER TABLE dim_country_sf ADD CONSTRAINT country_continent
+   FOREIGN KEY (continent_id) REFERENCES dim_continent_sf(continent_id);
+   
+-- Output updated table
+SELECT * FROM dim_country_sf;
+```
