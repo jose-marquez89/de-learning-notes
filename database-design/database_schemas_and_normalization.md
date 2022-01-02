@@ -99,3 +99,53 @@ ALTER TABLE dim_country_sf ADD CONSTRAINT country_continent
 -- Output updated table
 SELECT * FROM dim_country_sf;
 ```
+
+## Normal Forms
+Normalization is basically the identification of repeating groups of data and the creation of new tables for them
+
+More formal definition:
+- be able to characterize the level of redundancy in a relational schema
+- provide mechanisms for transforming schemas in order to reduce redundancy
+
+_above is from 'Database Design, 2nd Edition', Adrienne Watt_
+
+Normal forms are the levels of extent to which you can normalize data, here's a list from least to most normalized:
+- first normal form (1NF)
+- second normal form (2NF)
+- third normal form (2NF)
+- elementary key normal form (EKNF)
+- Boyce-Codd normal form (BCNF)
+- fourth normal form (4NF)
+- essential tuple normal form (ETNF)
+- fifth normal form (5NF)
+- domain key normal form (DKNF)
+- sixth normal form (6NF)
+
+### 1NF
+- each record is unique
+- each cell holds one value
+
+### 2NF
+- must satisfy 1NF **AND**
+    - if primary key is one column, 2NF is automatically satisfied
+- if there is a composite primary key
+    - each non-key column must be dependent on all keys
+    - in other words, a column that is dependent on only one piece of the composite key makes the table not satisfy 2NF
+
+### 3NF
+- satisfies 2NF
+- does not allow for **transitive dependencies**
+    - non-key columns can't depend on other non-key columns
+
+### Data anomalies
+If you don't normalize a database enough, it is prone to 3 types of anomaly errors:
+1. update anomaly
+    - this happens when there is a need to update more than one record
+    - the user would have to be aware of the data redundancy to make sure all records are updated
+2. insertion anomaly
+    - this happens when you're unable to add a new record due to missing attributes
+    - if a column doesn't accept nulls, you won't be able to add the new record if it has no data for a particular column
+3. deletion anomaly
+    - happens when you delete a record and unintentionally delete other data
+
+_Remember that there are downsides to normalization!_
