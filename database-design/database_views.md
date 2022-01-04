@@ -48,7 +48,12 @@ GRANT UPDATE ON ratings TO PUBLIC;
 Similarly:
 ```sql
 REVOKE INSERT ON films FROM db_user;
-``` ### Updating a view A user can update a view if they have the necessary priveleges. Here's an example: ```sql -- remember that not all views can be updated -- you're really updating the table behind the view
+``` 
+
+### Updating a view 
+A user can update a view if they have the necessary priveleges. Here's an example: 
+```sql 
+-- remember that not all views can be updated -- you're really updating the table behind the view
 UPDATE films SET kind = 'Dramatic' WHERE kind = 'Drama';
 ```
 When can you update a view?
