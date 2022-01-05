@@ -103,4 +103,43 @@ SELECT * FROM information_schema.views
 WHERE is_updatable = 'YES' AND table_schema = 'public';
 ```
 
-### Materialized views
+## Materialized views
+There are two types of views
+- views: aka non-materialized views
+- materialized view: stored on disk, not virtual
+    - can be refreshed on a schedule
+    - refresh frequency depends on how often you expect the data to change
+    - great if you have views with long execution time
+    - caveat: the data is only as current as the last time it was refreshed
+    - don't use on data that gets updated very often
+        - this can lead to analyses that are run on out of date data on a frequent basis
+
+### When to use materialized views
+- long runing queries
+- underlying query results don't change often
+- data warehouses because OLAP is mostly read
+    - saves on computational cost of running view queries
+
+### Creating materialized views 
+In PostgreSQL:
+```sql
+CREATE MATERIALIZED VIEW my_mv AS SELECT * FROM existing_table;
+```
+Refreshing:
+```sql
+REFRESH MATERIALIZED VIEW my_mv;
+```
+You can refresh materialized views on a schedule using something like cron jobs
+
+### Managing dependencies
+- materialized views often rely on other materialized views
+- you need to manage when you refresh materialized views based on dependencies
+- a query that depends on another with a long execution time may refresh with out-of-date data
+- you will often end up with a dependency chain
+
+### Tools for managing dependencies 
+- many companies use DAG (Directed Acyclic Graph) to keep track of views
+    - there are no cycles here, circular relationships are not part of DAGs
+- pipeline scheduler tools like airflow and luigi are also used
+
+
