@@ -93,3 +93,55 @@ Postgres has a set of default roles
     - you need to be very mindful of this
 
 ## Table Partitioning
+Why you might want to partition tables
+- some tables will get very large in size
+- indices will start to not fit in memory
+- when this happens you can _partition_ tables
+    - partitioning the table means splitting it up into smaller chunks
+- the _logical_ (see notes on procesing data) data model stays the same when you partition
+- partitioning is a part of the physical data model
+
+### Vertical partitioning
+This is when you partition by columns
+- a table may be split up in such a way that you end up with two tables
+- the second table may be a column or group of columns that are not queried very often
+- these columns can be linked with an id from the original unpartitioned table
+- you can store the new table on a slower medium
+
+### Horizontal partitioning
+This is when you partiiton by rows
+- you can split up a table's rows according to it's time stamp
+
+#### Declarative Partitioning (PostgreSQL 10)
+```sql
+CREATE TABLE sales (
+    ...
+    timestamp DATE NOT NULL
+)
+PARTITION BY RANGE (timestamp);
+
+CREATE TABLE sales_2019_q1 PARTITION OF sales
+    FOR VALUES FROM ('2019-01-01') TO ('2019-03-31');
+...
+CREATE TABLE sales_2019_q4 PARTITION OF sales
+    FOR VALUES FROM ('2019-09-01') TO ('2019-12-31');
+CREATE INDEX ON sales ('timestamp');
+```
+
+### Pros/Cons of Partitioning
+Pros
+- indices of heavily used partitions can fit into memory
+- you can move to a specific medium: slower vs faster
+- beneficial for both OLAP and OLTP
+
+Cons
+- partitioning an existing table can be a hassle
+    - you have to copy over the data to a new table
+- you won't be able to set certain constriaints (like PRIMARY KEY)
+
+### Relation to sharding
+This takes horizontal partitioning one step further
+- tables are spread over several machines
+- this is called sharding
+- related to massively parallel processing db's
+    - each node (machine) does calculations on specific shards
