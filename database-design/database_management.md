@@ -193,3 +193,32 @@ SELECT film_id, title, release_year FROM film;
 -- View film_partitioned
 SELECT * FROM film_partitioned;
 ```
+
+## Data integration
+What is data integration? It's the combination of data from different sources, formats and technologies to provide users with a translated and unified view of that data.
+
+### Business use cases
+- a 360 degree customer view
+    - a company wants to see data for all their customers from all departments in a unified view
+- Acquisition
+    - a company needs to integrate data from the database of a company they've acquired
+- Legacy systems
+    - a company needs to see data from a legacy system along with new systems all at once in a query
+
+### Things to consider for integration
+- cadence
+    - how often does the data need to refresh?
+- transformation
+    - different data sources will have different formats
+    - you can transform each source individually and maintain that code or you can use a tool that helps with data integration like **Apache Airflow** or **Scriptella**
+- choosing tools
+    - flexible: support many data sources
+    - reliable: still going to be able to maintain in a year
+    - scalable: anticipate increase in data volume and sources
+- automated testing and alerts
+    - you can do things like make sure that totals are still the same after aggregation
+- security
+    - if analysts didn't have access to a certain portion of the data in the original source, they shouldn't have access in the unified data model
+- data governance
+    - consider the lineage
+    - know where the data came from and where it is used
