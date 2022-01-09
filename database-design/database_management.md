@@ -222,3 +222,47 @@ What is data integration? It's the combination of data from different sources, f
 - data governance
     - consider the lineage
     - know where the data came from and where it is used
+
+## Picking a Database Management 
+
+### DBMS
+A DBMS is system software for creating and maintaining databases. It serves as an interface between the database and end users or applications.
+
+Depending on your needs you may end up using a SQL DBMS or a NoSQL DBMS
+
+### SQL DBMS
+- based on a relational model
+- SQL Server, PostgreSQL, Oracle SQL
+- good option when working with structured, unchanging data that benefits from an unchanging schema
+- good for things like accounting systems
+
+### NoSQL DBMS
+- much less structured than SQL DBMS
+- document-centered
+- good for situations where there is rapid data growth with no predefined schema
+- generally classified as either of four types
+    - key-value store
+    - document-store
+    - columnar
+    - graph database
+
+#### Key-Value store
+- example: Redis
+- used for managing session information in web apps
+- key value pairs like a python dictionary or JSON
+
+#### Document-store
+- similar to key-value store except that the stored values are documents that provide some structure and encoding
+- the strucutre can be used for more advanced queries than just simple value retrieval
+- good choice for content management platforms such as blogs and video platforms
+- an entity that an app is tracking can be a single document
+- mongoDB is an example of a document store DBMS
+
+#### Graph database
+- data is interconnected and best represented by a graph
+- used by applications like social networks and websites that recommend things based on your behavior
+- example Neo4j
+
+### Choosing a DBMS
+- fixed business structure: SQL
+- data is changing frequently and growing rapidly: NoSQL
