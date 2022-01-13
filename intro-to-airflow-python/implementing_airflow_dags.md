@@ -97,3 +97,106 @@ task1 >> task2 << task3
 task1 >> task2
 task3 >> task2
 ```
+
+## Additional operators
+
+### Python operator
+```python
+from airflow.operators.python_operator import PythonOperator
+
+def printme():
+    print("This goes in the logs!")
+
+python_task = PythonOperator(
+    task_id="simple_print",
+    python_callable=printme,
+    dag=example_dag
+)
+```
+
+### Passing arguments to functions from task definition
+`op_kwargs`:
+```python
+def sleep(length_of_time):
+    time.sleep(length_of_time)
+
+sleep_task = PythonOperator(
+    task_id='sleep',
+    python_callable=sleep,
+    op_kwargs={'length_of_time': 5}, # make sure arg names match function def
+    dag=example_dag
+)
+```
+
+### EmailOperator
+Airflow server details need to be configured with an email server to successfully send emails
+```python
+from airflow.operators.email_operator import EmailOperator
+
+email_task = EmailOperator(
+    task_id='email_sales_report',
+    to='sales_manager@example.com',
+    subject='Automated Sales Report',
+    html_content='Attached is the latest sales report',
+    files='latest_sales.xlsx',
+    dag=example_dag
+)
+```
+
+## Airflow Scheduling
+
+### Dag runs
+- you can run dags manually or with `schedule_interval`
+- each workflow and tasks within maintain a state
+    - running
+    - failed
+    - success
+- on the UI you can go to Browse > Dag runs to see states
+
+### Schedule details
+Attributes
+- `start_date`: initial dag run start
+- `end_date`: when to stop the dag's runs
+- `max_tries`: optional, how many times to try
+- `schedule_interval`: how many times to run
+    - uses standard cron syntax
+    - runs between `start_date` and `end_date`
+
+### Scheduler presets
+- @hourly
+- @daily
+- @monthly
+- @yearly
+
+Two special `schedule_interval` presets
+- `None`: don't schedule for manually triggered workflows
+- @once: only schedule once
+
+#### Scheduler considerations
+- airflow uses `start_date` as the earliest possible value
+- dag will not run until at least one schedule interval beyond the start date has passed
+
+Example
+```json
+'start_date': datetime(2020, 2, 25),
+'schedule_interval: @daily
+```
+Earliest DAG run will be Feb 26, 2020
+
+#### Schedule example
+```python
+# Update the scheduling arguments as defined
+default_args = {
+  'owner': 'Engineering',
+  'start_date': datetime(2019, 11, 1),
+  'email': ['airflowresults@datacamp.com'],
+  'email_on_failure': False,
+  'email_on_retry': False,
+  'retries': 3,
+  'retry_delay': timedelta(minutes=20)
+}
+
+dag = DAG('update_dataflows', default_args=default_args, schedule_interval='30 12 * * 3')
+```
+
+## Airflow Sensors
