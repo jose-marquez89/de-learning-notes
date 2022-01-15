@@ -124,7 +124,45 @@ Possible solutions
     - `python 3 <dagfile>`: will only help if there are syntax errors
 
 ## SLAs and Reporting in Airflow
+- _Service Level Agreement_
+- in airflow, this is the amount of time a task or DAG should require to run
+- an _SLA miss_ is exactly what it sounds like, the task or dag went over time
+- if an SLA is missed and email is properly configured for airflow, an email will be sent out
+    - a log is also stored
+- you can see SLA misses in the web UI
+    - browse > SLA misses
 
+### Defining an SLA
+Method 1
+```python
+task1 = BashOperator(task_id='sla_task',
+                     bash_command='runcode.sh',
+                     sla=timedelta(seconds=30),
+                     dag=dag)
+```
 
+Method 2: Default args passed into dag
+```python
+# remember to import timedelta from the datetime library
+default_args = {
+    'sla': timedelta(minutes=20),
+    'start_date': datetime(2020, 2, 20)
+}
+
+dag = DAG('sla_dag', default_args=default_args)
+```
+
+### General reporting
+- options for success / failure / error
+- keys in the default_args dict
+
+```python
+default_args = {
+    'email': ['someonesemail@company.net'],
+    'email_on_failure': True,
+    'email_on_retry': False,
+    'email_on_success': True
+}
+```
 
 
