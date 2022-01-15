@@ -89,6 +89,8 @@ What are executors?
 - you can also use `airflow list_dags` on the command line
     - `INFO - Using SequentialExecutor`
 
+## Debugging and troubleshooting in Airflow
+
 
 
 
