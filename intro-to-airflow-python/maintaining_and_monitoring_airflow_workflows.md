@@ -91,6 +91,40 @@ What are executors?
 
 ## Debugging and troubleshooting in Airflow
 
+### Typical issues
+- dag won't run on schedule
+- dag won't load
+- syntax errors
+
+#### Dag won't run on schedule
+- check if the scheduler is running
+- you can run `airflow scheduler` on the scheduler
+- at least one `schedule_interval` has not passed
+    - modify the attributes to fit requirements
+- not enough tasks free within the executor to run
+    - change the executor type
+    - add system resources
+    - add more systems
+    - change dag scheduling
+
+#### Dag won't load
+- dag not in the web UI
+- dag not in `airflow list_dags`
+
+Possible solutions
+- make sure the dag is in the right folder
+- determine the dag's folder via `airflow.cfg`
+    - the folder needs to be an absolute path
+
+#### Syntax errors
+- one of the most common reasons a dag won't appear
+- sometimes these are difficult to find
+- two quick methods
+    - `airflow list_dags`: this will show error output if something is unable to execute properly
+    - `python 3 <dagfile>`: will only help if there are syntax errors
+
+## SLAs and Reporting in Airflow
+
 
 
 
