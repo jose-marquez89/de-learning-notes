@@ -52,3 +52,45 @@ Scala is functional
 - `println()` prints to stdout
 
 ## Immutable variables and value types
+- two kinds of variables
+    - `val` is immutable
+    - `var` is mutable
+    - trying to change the value of a `val` will produce an error
+
+Scala value types
+- Double
+    - 64-bit IEEE-754 double-precision floating point numbers
+    - can accomodate very large and very small numbers
+    - more precise than a float
+- Float
+- Long
+- Int* 
+    - 32-bit signed integer
+    - ranges from -2^31 to 2^31 - 1 inclusive
+- Short
+- Byte
+- Char 
+    - you will rarely define a `Char`
+- Boolean*
+- Unit
+- String*
+    - a sequence of `Char`s
+- scala value types have equivalent java types
+    - when you compile scala code to jave bytecode, the scala compiler will use java types where possible which is very good for code performance
+    - choosing the right type makes programs smaller and faster
+
+*most common in data related tasks
+
+Here `fourHearts` is an instance of the `Int` class
+```
+scala> val fourHearts: Int = 4
+```
+
+Defining some `val` variables
+
+```scala
+// Define immutable variables for clubs 2♣ through 4♣
+val twoClubs: Int = 2
+val threeClubs: Int = 3
+val fourClubs: Int = 4
+```
