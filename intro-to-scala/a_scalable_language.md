@@ -94,3 +94,27 @@ val twoClubs: Int = 2
 val threeClubs: Int = 3
 val fourClubs: Int = 4
 ```
+
+### Mutable variables (var) and type inference
+You can use `var` variables that are mutable like the variables in python.
+
+Immutable variable pros and cons
+**Pros**
+- your data won't be changed inadvertently
+- your code is easier to reason about
+    - you don't have to mentally juggle all the places your data can change
+- you can write fewer unit tests to make sure your program works as expected 
+
+**Cons**
+- your programs will be a bit larger due to data copying
+
+Scala nudges towards immutability
+
+### Type inference
+```
+val fourHearts: Int = 4
+
+// same thing
+val fourHearts = 4
+```
+_Notice that while you can use semicolons, scala doesn't require it_
