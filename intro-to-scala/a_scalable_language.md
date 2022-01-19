@@ -111,7 +111,7 @@ Immutable variable pros and cons
 Scala nudges towards immutability
 
 ### Type inference
-```
+```scala
 val fourHearts: Int = 4
 
 // same thing
