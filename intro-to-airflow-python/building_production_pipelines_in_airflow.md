@@ -61,3 +61,27 @@ Provides useful objects and methods, just a few listed here, check docs for more
 ```
 
 ## Branching
+Allows for conditional logic in workflows
+```python
+from airflow.operators.python_operator import BranchPythonOperator
+
+# first you create the python callable
+def branch_test(**kwargs):
+    if int(kwargs['ds_nodash']) % 2 == 0:
+        return 'even_day_task'
+    else:
+        return 'odd_day_task'
+
+# provide_context tells airflow to provide access to runtime
+# variables and macros to the function
+branch_task = BranchPythonOperator(task_id='branch_task',
+                                   dag=dag,
+                                   provide_context=True,
+                                   python_callable=branch_test)
+# set dependencies
+# if you don't set these, all the tasks will run as normal
+# regardless of what the branch task returns
+start_task >> branch_task >> even_day_task >> even_day_task2
+branch_task >> odd_day_task >> odd_day_task2
+```
+_Pro Tip: always look for simple issues before going to try to heavily modify some part of your code_
