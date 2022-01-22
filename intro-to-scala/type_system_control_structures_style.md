@@ -25,3 +25,34 @@ _Note: Scala has type inference that allows code to be less verbose_
 How is the inflexibility in the language addressed? These are advanced topics but here are two ways:
 - pattern matching
 - innovative ways of writing and composing types
+
+## If/Else
+```scala
+val hand = 24
+
+if (hand > 21) {
+    println("This hand busts")
+}
+```
+In a function
+```scala
+def maxHand(handA: Int, handB: Int): Int = {
+    if (handA > handB) handA
+    else handB
+}
+```
+
+### if-else if-else
+```scala
+val handA = 26
+val handB = 20
+
+// find and print the best hand
+if (bust(handA) && bust(handB)) println(0)
+if else (bust(handA)) println(handB)
+if else (bust(handB)) println(handA)
+if else (handA > handB) println(handA)
+else println(hand)
+```
+
+_Note: you can assign an if-else statement to a variable in one line if it is readable (short)_
