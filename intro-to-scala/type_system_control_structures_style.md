@@ -56,3 +56,5 @@ else println(hand)
 ```
 
 _Note: you can assign an if-else statement to a variable in one line if it is readable (short)_
+
+## While and the imperative style
