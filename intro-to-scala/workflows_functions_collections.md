@@ -20,4 +20,60 @@
 You can use scala in jupyter notebooks with a kernel called [**almond**](https://almond.sh)
 
 ## Functions
-TODO
+- functions are **invoked** with a list of arguments to produce a result
+- in scala, functions are first class values
+Here's a function
+```scala
+def bust(hand: Int): Boolean = {
+    hand > 21;
+}
+```
+Another examples
+```scala
+def maxHand(handA: Int, handB: Int): Int = {
+  if (handA > handB) handA
+  else handB
+}
+```
+
+## Arrays
+- **parameterize an array**: configure its types and parameter values
+- **initialize elements of an array**: give the array data
+
+### Collections
+- There are mutable and immutable collections
+- an array is a type of collection
+- arrays are mutable
+
+Here is the parameterization and intitialization done all at once
+```
+scala> val players = Array("Alex", "Chen", "Marta")
+```
+
+Here it is split
+```scala
+// the players variable is of type Array[String]
+// it is an array of strings with length 3 where
+// length is the number of elements in the array
+val players: Array[String] = new Array[String](3)
+
+// adding values
+val players(0) = "Alex"
+val players(1) = "Chen"
+val players(2) = "Marta"
+```
+_Note: although we defined the array as a `val` (recommended for arrays) and not a `var` (which can be reassigned), it is still possible to change the values if the array because it is mutable. Creating the array using `val` reduces the amount of things you need to keep track of that can change_
+
+#### The 'Any' Supertype
+```scala
+val mixedTypes = new Array[Any](3)
+
+mixedTypes(0) = "I like turtles"
+mixedTypes(1) = 5000
+mixedTypes(2) = true
+```
+
+Oh by the way, forgot to tell you: _arrays as defined here aren't commonly used in scala because they encourage side effects via their mutability_
+
+
+
