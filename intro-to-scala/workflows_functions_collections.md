@@ -75,5 +75,43 @@ mixedTypes(2) = true
 
 Oh by the way, forgot to tell you: _arrays as defined here aren't commonly used in scala because they encourage side effects via their mutability_
 
+## Lists
+- immutable
+- has methods because it's an object
+- there are many list methods, these are only a few
+    - `myList.drop()`
+    - `myList.mkString(", ")`
+    - `myList.length()`
+    - `myList.reverse()`
 
+### Lists can still be useful
+While immutable, you can still use lists with changing values
+
+The `::` operator is pronounced "cons", popular concept in functional programming languages that you'll use often. There is an append operation that exists in scala but it isn't used because it's not as efficient
+```scala
+val players = List("Alex", "Chen", "Marta")
+
+// the :: operator prepends an element to the start of an existing list
+val newPlayers = "Sindu" :: players
+
+// you can also define players as a var
+var players = List("Alex", "Chen", "Marta")
+
+// then prepend in the same var
+var players = "Sindu" :: players
+```
+
+### Nil
+`Nil` is an empty list. A common way to initialize new lists is with `Nil` and `::`
+```scala
+val players = "Alex" :: "Chen" :: "Marta" :: Nil
+```
+
+### Concatenating lists
+```scala
+// kind of like python extend method on an list, kind of
+val playersA = List("Sindu", "Alex")
+val playersB = List("Chen", "Marta")
+val allPlayers = playersA ::: playersB
+```
 
