@@ -59,7 +59,6 @@ flights10.show()
 ```
 From SQL query to pandas DataFrame
 ```python
-# Don't change this query
 query = "SELECT origin, dest, COUNT(*) as N FROM flights GROUP BY origin, dest"
 
 # Run the query
@@ -91,7 +90,6 @@ print(spark.catalog.listTables())
 #### Read straight from a csv
 You don't really need pandas to bring a file into the spark cluster (is it actually in the spark cluster, I'm not sure of this)
 ```python
-# Don't change this file path
 file_path = "/usr/local/share/datasets/airports.csv"
 
 # Read in the airports data
