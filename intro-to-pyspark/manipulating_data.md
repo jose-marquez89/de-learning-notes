@@ -62,3 +62,17 @@ speed1 = flights.select("origin", "dest", "tailnum", avg_speed)
 # Create the same table using a SQL expression
 speed2 = flights.selectExpr("origin", "dest", "tailnum", "distance/(air_time/60) as avg_speed")
 ```
+
+### Aggregating
+- You can do all the usual SQL aggregations with a pyspark `GroupedData` object
+- use the `.groupBy()` method
+- `df.groupBy().min("column").show()`
+
+Example:
+```python
+# Find the shortest flight from PDX in terms of distance
+flights.filter(flights.origin == "PDX").groupBy().min("distance").show()
+
+# Find the longest flight from SEA in terms of air time
+flights.filter(flights.origin == "SEA").groupBy().max("air_time").show()
+```
